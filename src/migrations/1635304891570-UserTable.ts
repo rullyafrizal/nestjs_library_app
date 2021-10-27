@@ -8,8 +8,8 @@ export class UserTable1635304891570 implements MigrationInterface {
         '    email VARCHAR(100) UNIQUE NOT NULL,\n' +
         '    password VARCHAR(255) NOT NULL,\n' +
         "    role ENUM('ADMIN', 'USER') DEFAULT 'USER',\n" +
-        '    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n' +
-        '    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP\n' +
+        '    createdAt TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n' +
+        '    updatedAt TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP\n' +
         ')',
     );
   }

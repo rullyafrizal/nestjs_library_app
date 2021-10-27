@@ -2,27 +2,29 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Book } from '../books/book.entity';
 
 @Entity('authors')
 export class Author {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'first_name', nullable: false })
+  @Column()
   firstName: string;
 
-  @Column({ name: 'last_name', nullable: false })
+  @Column()
   lastName: string;
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
+  @UpdateDateColumn()
   updatedAt: Date;
 
-  // @OneToMany(() => Book, (books) => books.author)
-  // books: Book[];
+  @OneToMany(() => Book, (books) => books.author, { eager: true })
+  books: Book[];
 }

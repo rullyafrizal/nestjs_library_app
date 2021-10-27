@@ -1,10 +1,14 @@
 import {
   Column,
   CreateDateColumn,
+  Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Author } from '../authors/authors.entity';
 
+@Entity('books')
 export class Book {
   @PrimaryGeneratedColumn()
   id: number;
@@ -27,6 +31,6 @@ export class Book {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  // @ManyToOne(() => Author, (author) => author.books)
-  // author: Author;
+  @ManyToOne(() => Author, (author) => author.books, { eager: false })
+  author: Author;
 }

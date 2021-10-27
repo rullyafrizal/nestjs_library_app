@@ -14,24 +14,24 @@ export class AuthorTable1635303454345 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'first_name',
+            name: 'firstName',
             type: 'varchar',
             length: '100',
             isNullable: false,
           },
           {
-            name: 'last_name',
+            name: 'lastName',
             type: 'varchar',
             length: '100',
             isNullable: false,
           },
           {
-            name: 'created_at',
+            name: 'createdAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updated_at',
+            name: 'updatedAt',
             type: 'timestamp',
             default: 'now()',
           },

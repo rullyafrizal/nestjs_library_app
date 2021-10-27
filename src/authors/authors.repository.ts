@@ -12,7 +12,7 @@ export class AuthorsRepository extends Repository<Author> {
 
     if (search) {
       query.andWhere(
-        'LOWER(author.first_name) LIKE LOWER(:search) OR LOWER(author.last_name) LIKE LOWER(:search)',
+        'LOWER(author.firstName) LIKE LOWER(:search) OR LOWER(author.lastName) LIKE LOWER(:search)',
         { search: `%${search}%` },
       );
     }

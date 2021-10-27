@@ -37,18 +37,18 @@ export class BookTable1635304064869 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'published_year',
+            name: 'publishedYear',
             type: 'varchar',
             length: '4',
             isNullable: false,
           },
           {
-            name: 'created_at',
+            name: 'createdAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updated_at',
+            name: 'updatedAt',
             type: 'timestamp',
             default: 'now()',
           },
@@ -59,7 +59,7 @@ export class BookTable1635304064869 implements MigrationInterface {
     await queryRunner.addColumn(
       'books',
       new TableColumn({
-        name: 'author_id',
+        name: 'authorId',
         type: 'int',
       }),
     );
@@ -67,7 +67,7 @@ export class BookTable1635304064869 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'books',
       new TableForeignKey({
-        columnNames: ['author_id'],
+        columnNames: ['authorId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'authors',
         onDelete: 'CASCADE',
@@ -79,10 +79,10 @@ export class BookTable1635304064869 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     const table = await queryRunner.getTable('books');
     const foreignKey = table.foreignKeys.find(
-      (fk) => fk.columnNames.indexOf('author_id') !== -1,
+      (fk) => fk.columnNames.indexOf('authorId') !== -1,
     );
     await queryRunner.dropForeignKey('books', foreignKey);
-    await queryRunner.dropColumn('books', 'author_id');
+    await queryRunner.dropColumn('books', 'authorId');
     await queryRunner.dropTable('books');
   }
 }

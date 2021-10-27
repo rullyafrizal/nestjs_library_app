@@ -4,7 +4,7 @@ export class ReviewTable1635304899136 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
       'CREATE TABLE IF NOT EXISTS reviews (\n' +
-        '    user_id INT NOT NULL,\n' +
+        '    user_id VARCHAR(45) NOT NULL,\n' +
         '    book_id INT NOT NULL,\n' +
         '    rating VARCHAR(1),\n' +
         '    comment LONGTEXT,\n' +

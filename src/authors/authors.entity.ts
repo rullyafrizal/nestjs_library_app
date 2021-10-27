@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity('authors')
 export class Author {
   @PrimaryGeneratedColumn()
   id: number;
@@ -17,10 +17,10 @@ export class Author {
   @Column({ name: 'last_name', nullable: false })
   lastName: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
   // @OneToMany(() => Book, (books) => books.author)

@@ -5,10 +5,10 @@ export class ProfileTable1635304918218 implements MigrationInterface {
     await queryRunner.query(
       'CREATE TABLE IF NOT EXISTS profiles (\n' +
         '    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,\n' +
-        '    user_id INT NOT NULL,\n' +
-        '    name VARCHAR(255) NOT NULL,\n' +
+        '    user_id VARCHAR(45) NOT NULL,\n' +
+        '    name VARCHAR(255),\n' +
         '    address VARCHAR(255),\n' +
-        '    birth_date DATE NOT NULL,\n' +
+        '    birth_date DATE,\n' +
         '    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n' +
         '    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,\n' +
         '\n' +

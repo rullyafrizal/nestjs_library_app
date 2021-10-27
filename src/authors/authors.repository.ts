@@ -4,7 +4,7 @@ import { CreateAuthorDto } from './dto/create-author.dto';
 import { GetAuthorSearchDto } from './dto/get-author-search.dto';
 
 @EntityRepository(Author)
-export class AuthorRepository extends Repository<Author> {
+export class AuthorsRepository extends Repository<Author> {
   async getAuthors(getAuthorSearchDto: GetAuthorSearchDto): Promise<Author[]> {
     const { search } = getAuthorSearchDto;
 

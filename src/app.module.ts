@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AuthorModule } from './authors/author.module';
+import { AuthorsModule } from './authors/authors.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BookModule } from './books/book.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    AuthorModule,
+    AuthorsModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -23,6 +24,7 @@ import { BookModule } from './books/book.module';
       },
     }),
     BookModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

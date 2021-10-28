@@ -3,21 +3,18 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from './user.entity';
 import { Book } from './book.entity';
 
-@Entity('review')
+@Entity('reviews')
 export class Review {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
+  @PrimaryColumn()
   userId!: string;
 
-  @Column()
+  @PrimaryColumn()
   bookId!: number;
 
   @Column({ nullable: false })
@@ -32,9 +29,9 @@ export class Review {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @ManyToOne(() => User, (user) => user.reviews)
+  @ManyToOne(() => User, (user) => user.reviews, { primary: true })
   user!: User;
 
-  @ManyToOne(() => Book, (book) => book.reviews)
+  @ManyToOne(() => Book, (book) => book.reviews, { primary: true })
   book!: Book;
 }

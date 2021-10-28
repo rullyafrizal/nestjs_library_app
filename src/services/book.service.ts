@@ -5,11 +5,16 @@ import { CreateBookDto } from '../dto/book/create-book.dto';
 import { Book } from '../entities/book.entity';
 import { GetBookSearchFilterDto } from '../dto/book/get-book-search-filter.dto';
 import { UpdateBookDto } from '../dto/book/update-book.dto';
+import { ReviewBookDto } from '../dto/book/review-book.dto';
+import { User } from '../entities/user.entity';
+import { ReviewRepository } from '../repositories/review.repository';
 
 @Injectable()
 export class BookService {
   constructor(
     @InjectRepository(BookRepository) private bookRepository: BookRepository,
+    @InjectRepository(ReviewRepository)
+    private reviewRepository: ReviewRepository,
   ) {}
 
   async createBook(createBookDto: CreateBookDto): Promise<Book> {
@@ -47,5 +52,22 @@ export class BookService {
   async deleteBook(id: number): Promise<void> {
     await this.getBook(id);
     await this.bookRepository.delete(id);
+  }
+
+  async reviewBook(
+    id: number,
+    user: User,
+    reviewBookDto: ReviewBookDto,
+  ): Promise<void> {
+    const { rating, comment } = reviewBookDto;
+    const review = this.reviewRepository.create({
+      userId: user.id,
+      bookId: id,
+    });
+
+    review.rating = String(rating);
+    review.comment = comment;
+
+    await this.reviewRepository.save(review);
   }
 }

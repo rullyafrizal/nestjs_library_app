@@ -16,6 +16,9 @@ import { CreateBookDto } from '../dto/book/create-book.dto';
 import { ApiHttpResponse } from '../interfaces/response.inteface';
 import { GetBookSearchFilterDto } from '../dto/book/get-book-search-filter.dto';
 import { UpdateBookDto } from '../dto/book/update-book.dto';
+import { GetUser } from '../decorators/get-user.decorator';
+import { User } from '../entities/user.entity';
+import { ReviewBookDto } from '../dto/book/review-book.dto';
 
 @Controller('books')
 @UseGuards(AuthGuard())
@@ -78,6 +81,20 @@ export class BookController {
     return {
       status: HttpStatus.OK,
       message: 'Book successfully deleted',
+    };
+  }
+
+  @Post('/:id')
+  async review(
+    @Param('id') id: number,
+    @GetUser() user: User,
+    @Body() reviewBookDto: ReviewBookDto,
+  ): Promise<ApiHttpResponse> {
+    await this.bookService.reviewBook(id, user, reviewBookDto);
+
+    return {
+      status: HttpStatus.OK,
+      message: 'Successfully create review',
     };
   }
 }

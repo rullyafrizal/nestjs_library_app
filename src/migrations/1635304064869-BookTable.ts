@@ -70,8 +70,7 @@ export class BookTable1635304064869 implements MigrationInterface {
         columnNames: ['authorId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'authors',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        onDelete: null,
       }),
     );
   }

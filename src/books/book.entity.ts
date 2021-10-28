@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Author } from '../authors/authors.entity';
+import { Author } from '../authors/author.entity';
 
 @Entity('books')
 export class Book {

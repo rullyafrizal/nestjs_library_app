@@ -1,24 +1,24 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { AuthorsRepository } from './authors.repository';
+import { AuthorRepository } from './author.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateAuthorDto } from './dto/create-author.dto';
-import { Author } from './authors.entity';
+import { Author } from './author.entity';
 import { GetAuthorSearchDto } from './dto/get-author-search.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
 
 @Injectable()
-export class AuthorsService {
+export class AuthorService {
   constructor(
-    @InjectRepository(AuthorsRepository)
-    private authorsRepository: AuthorsRepository,
+    @InjectRepository(AuthorRepository)
+    private authorRepository: AuthorRepository,
   ) {}
 
   getAuthors(getAuthorSearchDto: GetAuthorSearchDto): Promise<Author[]> {
-    return this.authorsRepository.getAuthors(getAuthorSearchDto);
+    return this.authorRepository.getAuthors(getAuthorSearchDto);
   }
 
   async getAuthor(id: number): Promise<Author> {
-    const author = await this.authorsRepository.findOne(id);
+    const author = await this.authorRepository.findOne(id);
 
     if (!author) {
       throw new NotFoundException();
@@ -28,7 +28,7 @@ export class AuthorsService {
   }
 
   createAuthor(createAuthorDto: CreateAuthorDto): Promise<Author> {
-    return this.authorsRepository.createAuthor(createAuthorDto);
+    return this.authorRepository.createAuthor(createAuthorDto);
   }
 
   async updateAuthor(
@@ -40,13 +40,13 @@ export class AuthorsService {
     author.firstName = updateAuthorDto.firstName;
     author.lastName = updateAuthorDto.lastName;
 
-    await this.authorsRepository.save(author);
+    await this.authorRepository.save(author);
 
     return author;
   }
 
   async deleteAuthor(id: number): Promise<void> {
     await this.getAuthor(id);
-    await this.authorsRepository.delete(id);
+    await this.authorRepository.delete(id);
   }
 }

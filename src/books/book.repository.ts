@@ -1,6 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Book } from './book.entity';
 import { CreateBookDto } from './dto/create-book.dto';
+import { GetBookSearchFilterDto } from './dto/get-book-search-filter.dto';
 
 @EntityRepository(Book)
 export class BookRepository extends Repository<Book> {
@@ -17,5 +18,33 @@ export class BookRepository extends Repository<Book> {
 
     await this.save(book);
     return book;
+  }
+
+  async getBooks(getBookDto: GetBookSearchFilterDto): Promise<Book[]> {
+    const { search, year, author, language } = getBookDto;
+
+    const query = this.createQueryBuilder('books');
+
+    if (search) {
+      query.andWhere('LOWER(books.title) like LOWER(:search)', {
+        search: `%${search}%`,
+      });
+    }
+
+    if (year) {
+      query.andWhere('books.publishedYear = :year', { year });
+    }
+
+    if (author) {
+      query.andWhere('books.author = :author', { author });
+    }
+
+    if (language) {
+      query.andWhere('LOWER(books.language) = LOWER(:language)', {
+        language,
+      });
+    }
+
+    return await query.getMany();
   }
 }

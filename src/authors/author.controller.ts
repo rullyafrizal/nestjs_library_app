@@ -10,7 +10,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { AuthorsService } from './authors.service';
+import { AuthorService } from './author.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { GetAuthorSearchDto } from './dto/get-author-search.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
@@ -19,14 +19,14 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller('authors')
 @UseGuards(AuthGuard())
-export class AuthorsController {
-  constructor(private authorsService: AuthorsService) {}
+export class AuthorController {
+  constructor(private authorService: AuthorService) {}
 
   @Get()
-  async getAuthors(
+  async index(
     @Query() searchDto: GetAuthorSearchDto,
   ): Promise<ApiHttpResponse> {
-    const authors = await this.authorsService.getAuthors(searchDto);
+    const authors = await this.authorService.getAuthors(searchDto);
 
     return {
       status: HttpStatus.OK,
@@ -36,8 +36,8 @@ export class AuthorsController {
   }
 
   @Get('/:id')
-  async getAuthor(@Param('id') id: number): Promise<ApiHttpResponse> {
-    const author = await this.authorsService.getAuthor(id);
+  async show(@Param('id') id: number): Promise<ApiHttpResponse> {
+    const author = await this.authorService.getAuthor(id);
 
     return {
       status: HttpStatus.OK,
@@ -47,10 +47,10 @@ export class AuthorsController {
   }
 
   @Post()
-  async createAuthor(
+  async create(
     @Body() createAuthorDto: CreateAuthorDto,
   ): Promise<ApiHttpResponse> {
-    const author = await this.authorsService.createAuthor(createAuthorDto);
+    const author = await this.authorService.createAuthor(createAuthorDto);
 
     return {
       status: HttpStatus.CREATED,
@@ -60,11 +60,11 @@ export class AuthorsController {
   }
 
   @Put('/:id')
-  async updateAuthor(
+  async update(
     @Param('id') id: number,
     @Body() updateAuthorDto: UpdateAuthorDto,
   ): Promise<ApiHttpResponse> {
-    const author = await this.authorsService.updateAuthor(id, updateAuthorDto);
+    const author = await this.authorService.updateAuthor(id, updateAuthorDto);
 
     return {
       status: HttpStatus.OK,
@@ -74,8 +74,8 @@ export class AuthorsController {
   }
 
   @Delete('/:id')
-  async deleteAuthor(@Param('id') id: number): Promise<ApiHttpResponse> {
-    await this.authorsService.deleteAuthor(id);
+  async delete(@Param('id') id: number): Promise<ApiHttpResponse> {
+    await this.authorService.deleteAuthor(id);
 
     return {
       status: HttpStatus.OK,

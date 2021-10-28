@@ -1,5 +1,5 @@
-import { IsNotEmpty, IsNumber, MaxLength, MinLength } from 'class-validator';
-import { Author } from '../../authors/authors.entity';
+import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
+import { Author } from '../../authors/author.entity';
 
 export class CreateBookDto {
   @IsNotEmpty()
@@ -10,16 +10,13 @@ export class CreateBookDto {
   language: string;
 
   @IsNotEmpty()
-  @IsNumber()
   pages: number;
 
   @IsNotEmpty()
   @MaxLength(4)
   @MinLength(4)
-  @IsNumber()
   publishedYear: string;
 
   @IsNotEmpty()
-  @IsNumber()
   author: Author;
 }

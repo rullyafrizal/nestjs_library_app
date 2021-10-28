@@ -1,30 +1,22 @@
 import { Module } from '@nestjs/common';
-import { AuthorsModule } from './authors/authors.module';
+import { AuthorModule } from './authors/author.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BookModule } from './books/book.module';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmConfigService } from './config/typeorm/typeormconfig.service';
 
 @Module({
   imports: [
-    AuthorsModule,
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 33769,
-      username: 'root',
-      password: 'secret',
-      database: 'nest_library_app',
-      autoLoadEntities: true,
-      synchronize: false,
-      migrationsTableName: 'migrations_typeorm',
-      migrationsRun: true,
-      migrations: ['dist/migrations/*{.ts,.js}'],
-      cli: {
-        migrationsDir: 'migration',
-      },
-    }),
+    AuthorModule,
     BookModule,
     AuthModule,
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useClass: TypeOrmConfigService,
+    }),
+    ConfigModule.forRoot(),
   ],
   controllers: [],
   providers: [],

@@ -3,11 +3,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Role } from '../enums/role.enum';
 import * as bcrypt from 'bcrypt';
+import { Profile } from './profile.entity';
 
 @Entity('users')
 export class User {
@@ -28,6 +30,9 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToOne(() => Profile, (profile) => profile.user, { eager: true })
+  profile: Profile;
 
   @BeforeInsert()
   async hashPassword(): Promise<void> {

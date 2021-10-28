@@ -4,23 +4,27 @@ import {
   InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UserRepository } from './user.repository';
+import { UserRepository } from '../repositories/user.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
+import { AuthCredentialsDto } from '../dto/auth/auth-credentials.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { JwtPayload } from './jwt/jwt-payload.interface';
+import { JwtPayload } from '../auth/jwt/jwt-payload.interface';
+import { ProfileRepository } from '../repositories/profile.repository';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(UserRepository) private userRepository: UserRepository,
+    @InjectRepository(ProfileRepository)
+    private profileRepository: ProfileRepository,
     private jwtService: JwtService,
   ) {}
 
   async signUp(authCredentials: AuthCredentialsDto): Promise<void> {
     try {
-      await this.userRepository.createUser(authCredentials);
+      const user = await this.userRepository.createUser(authCredentials);
+      await this.profileRepository.createProfile(user);
     } catch (err) {
       if (err.code === 'ER_DUP_ENTRY') {
         throw new ConflictException('Email already exists, try another one');

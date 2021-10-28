@@ -1,6 +1,6 @@
 import { Optional } from '@nestjs/common';
 import { MaxLength, MinLength } from 'class-validator';
-import { Author } from '../../authors/author.entity';
+import { Author } from '../../entities/author.entity';
 
 export class UpdateBookDto {
   @Optional()

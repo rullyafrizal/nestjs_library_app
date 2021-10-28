@@ -1,7 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { Book } from './book.entity';
-import { CreateBookDto } from './dto/create-book.dto';
-import { GetBookSearchFilterDto } from './dto/get-book-search-filter.dto';
+import { Book } from '../entities/book.entity';
+import { CreateBookDto } from '../dto/book/create-book.dto';
+import { GetBookSearchFilterDto } from '../dto/book/get-book-search-filter.dto';
 
 @EntityRepository(Book)
 export class BookRepository extends Repository<Book> {

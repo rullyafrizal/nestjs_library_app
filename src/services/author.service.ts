@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { AuthorRepository } from './author.repository';
+import { AuthorRepository } from '../repositories/author.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateAuthorDto } from './dto/create-author.dto';
-import { Author } from './author.entity';
-import { GetAuthorSearchDto } from './dto/get-author-search.dto';
-import { UpdateAuthorDto } from './dto/update-author.dto';
+import { CreateAuthorDto } from '../dto/author/create-author.dto';
+import { Author } from '../entities/author.entity';
+import { GetAuthorSearchDto } from '../dto/author/get-author-search.dto';
+import { UpdateAuthorDto } from '../dto/author/update-author.dto';
 
 @Injectable()
 export class AuthorService {

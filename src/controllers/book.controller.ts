@@ -10,12 +10,12 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { BookService } from './book.service';
+import { BookService } from '../services/book.service';
 import { AuthGuard } from '@nestjs/passport';
-import { CreateBookDto } from './dto/create-book.dto';
+import { CreateBookDto } from '../dto/book/create-book.dto';
 import { ApiHttpResponse } from '../interfaces/response.inteface';
-import { GetBookSearchFilterDto } from './dto/get-book-search-filter.dto';
-import { UpdateBookDto } from './dto/update-book.dto';
+import { GetBookSearchFilterDto } from '../dto/book/get-book-search-filter.dto';
+import { UpdateBookDto } from '../dto/book/update-book.dto';
 
 @Controller('books')
 @UseGuards(AuthGuard())

@@ -2,28 +2,26 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Author } from '../authors/author.entity';
+import { User } from './user.entity';
 
-@Entity('books')
-export class Book {
+@Entity('profiles')
+export class Profile {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  title: string;
+  name: string;
 
   @Column()
-  language: string;
+  address: string;
 
   @Column()
-  pages: number;
-
-  @Column()
-  publishedYear: string;
+  birthDate: Date;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -31,6 +29,7 @@ export class Book {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @ManyToOne(() => Author, (author) => author.books, { eager: false })
-  author: Author;
+  @OneToOne(() => User, (user) => user.profile)
+  @JoinColumn()
+  user: User;
 }

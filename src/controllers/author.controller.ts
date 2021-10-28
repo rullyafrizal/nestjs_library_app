@@ -10,10 +10,10 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { AuthorService } from './author.service';
-import { CreateAuthorDto } from './dto/create-author.dto';
-import { GetAuthorSearchDto } from './dto/get-author-search.dto';
-import { UpdateAuthorDto } from './dto/update-author.dto';
+import { AuthorService } from '../services/author.service';
+import { CreateAuthorDto } from '../dto/author/create-author.dto';
+import { GetAuthorSearchDto } from '../dto/author/get-author-search.dto';
+import { UpdateAuthorDto } from '../dto/author/update-author.dto';
 import { ApiHttpResponse } from '../interfaces/response.inteface';
 import { AuthGuard } from '@nestjs/passport';
 

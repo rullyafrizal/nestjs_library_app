@@ -1,7 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { Author } from './author.entity';
-import { CreateAuthorDto } from './dto/create-author.dto';
-import { GetAuthorSearchDto } from './dto/get-author-search.dto';
+import { Author } from '../entities/author.entity';
+import { CreateAuthorDto } from '../dto/author/create-author.dto';
+import { GetAuthorSearchDto } from '../dto/author/get-author-search.dto';
 
 @EntityRepository(Author)
 export class AuthorRepository extends Repository<Author> {

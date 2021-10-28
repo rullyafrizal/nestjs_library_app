@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AuthorModule } from './authors/author.module';
+import { AuthorModule } from './modules/author.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BookModule } from './books/book.module';
-import { AuthModule } from './auth/auth.module';
+import { BookModule } from './modules/book.module';
+import { AuthModule } from './modules/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmConfigService } from './config/typeorm/typeormconfig.service';
 

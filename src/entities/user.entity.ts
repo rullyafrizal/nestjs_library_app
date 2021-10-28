@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -11,6 +12,7 @@ import { Role } from '../enums/role.enum';
 import * as bcrypt from 'bcrypt';
 import { Profile } from './profile.entity';
 import { Exclude } from 'class-transformer';
+import { Review } from './review.entity';
 
 @Entity('users')
 export class User {
@@ -37,6 +39,9 @@ export class User {
 
   @OneToOne(() => Profile, (profile) => profile.user, { eager: true })
   profile: Profile;
+
+  @OneToMany(() => Review, (review) => review.user)
+  reviews!: Review[];
 
   @BeforeInsert()
   async hashPassword(): Promise<void> {

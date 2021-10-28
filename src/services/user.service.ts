@@ -13,13 +13,6 @@ export class UserService {
     private profileRepository: ProfileRepository,
   ) {}
 
-  // async getUser(id: string, user: User): Promise<User | Profile> {
-  //   // const profile = this.userRepository.findOne(id);
-  //   const profile = this.profileRepository.findOne({ where: { id, user } });
-  //
-  //   return profile;
-  // }
-
   async updateProfile(
     user: User,
     updateProfileDto: UpdateProfileDto,

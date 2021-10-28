@@ -20,13 +20,13 @@ export class Profile {
   @Column()
   address: string;
 
-  @Column()
+  @Column({ type: 'date' })
   birthDate: Date;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
   @OneToOne(() => User, (user) => user.profile)

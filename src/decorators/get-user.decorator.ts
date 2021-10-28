@@ -1,6 +1,7 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const GetUser = createParamDecorator(
   (data, ctx: ExecutionContext): User => {
     const req = ctx.switchToHttp().getRequest();
